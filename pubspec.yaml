@@ -20,7 +20,7 @@ dependencies:
   shared_preferences: ^2.2.3
 
   # Voice & Speech recognition input matrix
-  #speech_to_text: ^6.6.0
+
 
   # Markdown & Rich Mathematical typesetting
   flutter_markdown: ^0.7.2+1
