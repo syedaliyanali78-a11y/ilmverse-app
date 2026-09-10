@@ -1,91 +1,60 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const ModVerseAIApp());
+  runApp(const MarsFleetAIApp());
 }
 
-class ModVerseAIApp extends StatelessWidget {
-  const ModVerseAIApp({Key? key}) : super(key: key);
+class MarsFleetAIApp extends StatelessWidget {
+  const MarsFleetAIApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ModVerse AI',
+      title: 'Mars & Cyber-Fleet AI Matrix',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF0B0F19),
-        primaryColor: const Color(0xFF00F0FF),
+        scaffoldBackgroundColor: const Color(0xFF05070B),
+        primaryColor: const Color(0xFF00FF66), // SpaceX/Cyber Neon Green
         colorScheme: const ColorScheme.dark(
-          primary: Color(0xFF00F0FF),
-          secondary: Color(0xFF7000FF),
-          surface: Color(0xFF131825),
+          primary: Color(0xFF00FF66),
+          secondary: Color(0xFF00E5FF),
+          surface: Color(0xFF0E1420),
         ),
         fontFamily: 'Roboto',
       ),
-      home: const DashboardScreen(),
+      home: const ControlRoomScreen(),
     );
   }
 }
 
-class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+class ControlRoomScreen extends StatefulWidget {
+  const ControlRoomScreen({Key? key}) : super(key: key);
 
   @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
+  State<ControlRoomScreen> createState() => _ControlRoomScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _ControlRoomScreenState extends State<ControlRoomScreen> {
   int _selectedIndex = 0;
-  int _credits = 240;
-  String _selectedVehicle = 'CAR';
-  String _selectedStyle = 'Cyberpunk Neon';
-  bool _isGenerating = false;
+  bool _isOptimizing = false;
+  String _selectedSystem = 'Tesla Cyber-Fleet';
+  double _neuralSyncLevel = 98.4;
 
-  final List<Map<String, dynamic>> _styles = [
-    {
-      'title': 'Cyberpunk Neon',
-      'desc': 'Glowing lines, matte obsidian finish, sci-fi splitters.',
-      'image': 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80',
-    },
-    {
-      'title': 'Off-Road Beast',
-      'desc': 'Rugged 4x4 suspension, heavy armor, massive tires.',
-      'image': 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80',
-    },
-    {
-      'title': 'Royal Luxury',
-      'desc': 'Ultra-deep obsidian black with 24k brushed gold accents.',
-      'image': 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&q=80',
-    },
-    {
-      'title': 'Anime Speedster',
-      'desc': 'Vibrant street-racing graffiti & dynamic aero wings.',
-      'image': 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80',
-    },
-  ];
-
-  void _triggerGeneration() {
-    if (_credits < 5) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Not enough credits! Please top up.')),
-      );
-      return;
-    }
-
+  void _runNeuralOptimization() {
     setState(() {
-      _isGenerating = true;
+      _isOptimizing = true;
     });
 
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
-        _isGenerating = false;
-        _credits -= 5;
+        _isOptimizing = false;
+        _neuralSyncLevel = 99.9;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Successfully generated 4 unique variations in "$_selectedStyle"!'),
-          backgroundColor: Colors.teal,
+        const SnackBar(
+          content: Text('Neural Link Active: Telemetry & Aerodynamics Optimized by 42%!'),
+          backgroundColor: Color(0xFF00FF66),
         ),
       );
     });
@@ -95,24 +64,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF131825),
+        backgroundColor: const Color(0xFF0E1420),
         elevation: 0,
         title: Row(
           children: [
+            const Icon(Icons.rocket_launch, color: Color(0xFF00FF66), size: 20),
+            const SizedBox(width: 8),
             const Text(
-              'ModVerse AI',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF00F0FF)),
+              'MARS MATRIX X',
+              style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF00FF66), letterSpacing: 1.2),
             ),
             const SizedBox(width: 8),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: Colors.teal.withOpacity(0.2),
+                color: const Color(0xFF00FF66).withOpacity(0.15),
                 borderRadius: BorderRadius.circular(4),
-                border: Border.all(color: Colors.tealAccent),
+                border: Border.all(color: const Color(0xFF00FF66)),
               ),
-              style: const TextStyle(fontSize: 10),
-              child: const Text('PRO V2.4', style: TextStyle(color: Colors.tealAccent)),
+              child: const Text('XAI-V9', style: TextStyle(color: Color(0xFF00FF66), fontSize: 10)),
             ),
           ],
         ),
@@ -121,33 +91,33 @@ class _DashboardScreenState extends State<DashboardScreen> {
             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
             padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
-              color: const Color(0xFF1F2937),
+              color: const Color(0xFF161F30),
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Colors.cyan.withOpacity(0.4)),
+              border: Border.all(color: Colors.greenAccent.withOpacity(0.3)),
             ),
             child: Row(
               children: [
-                const Icon(Icons.flash_on, size: 16, color: Color(0xFF00F0FF)),
+                const Icon(Icons.bolt, size: 16, color: Color(0xFF00FF66)),
                 const SizedBox(width: 4),
-                Text('$_credits Cr', style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text('$_neuralSyncLevel%', style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF00FF66))),
               ],
             ),
           ),
         ],
       ),
-      body: _isGenerating
+      body: _isOptimizing
           ? Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  CircularProgressIndicator(color: Color(0xFF00F0FF)),
+                  CircularProgressIndicator(color: Color(0xFF00FF66)),
                   SizedBox(height: 20),
                   Text(
-                    'Neural Engine Synthesizing Unique Concept...',
-                    style: TextStyle(color: Colors.cyanAccent, fontSize: 16),
+                    'Syncing with Starlink & Neural Network...',
+                    style: TextStyle(color: Color(0xFF00FF66), fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 8),
-                  Text('Applying never-seen-before mods...', style: TextStyle(color: Colors.grey)),
+                  Text('Recalibrating Mars Rover Terrain Physics...', style: TextStyle(color: Colors.grey)),
                 ],
               ),
             )
@@ -156,24 +126,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Vehicle Type Toggle (Car / Bike)
+                  // System Selector Tabs
                   Row(
                     children: [
                       Expanded(
                         child: GestureDetector(
-                          onTap: () => setState(() => _selectedVehicle = 'CAR'),
+                          onTap: () => setState(() => _selectedSystem = 'Tesla Cyber-Fleet'),
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 12),
                             decoration: BoxDecoration(
-                              color: _selectedVehicle == 'CAR' ? const Color(0xFF00F0FF) : const Color(0xFF131825),
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: const Color(0xFF00F0FF)),
+                              color: _selectedSystem == 'Tesla Cyber-Fleet' ? const Color(0xFF00FF66) : const Color(0xFF0E1420),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: const Color(0xFF00FF66)),
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              '🚗 HYPERCAR',
+                              '⚡ TESLA FLEET',
                               style: TextStyle(
-                                color: _selectedVehicle == 'CAR' ? Colors.black : Colors.white,
+                                color: _selectedSystem == 'Tesla Cyber-Fleet' ? Colors.black : const Color(0xFF00FF66),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -183,19 +153,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: GestureDetector(
-                          onTap: () => setState(() => _selectedVehicle = 'BIKE'),
+                          onTap: () => setState(() => _selectedSystem = 'Mars Rover AI'),
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 12),
                             decoration: BoxDecoration(
-                              color: _selectedVehicle == 'BIKE' ? const Color(0xFF00F0FF) : const Color(0xFF131825),
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: const Color(0xFF00F0FF)),
+                              color: _selectedSystem == 'Mars Rover AI' ? const Color(0xFF00FF66) : const Color(0xFF0E1420),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: const Color(0xFF00FF66)),
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              '🏍️ SUPERBIKE',
+                              '🚀 MARS ROVER',
                               style: TextStyle(
-                                color: _selectedVehicle == 'BIKE' ? Colors.black : Colors.white,
+                                color: _selectedSystem == 'Mars Rover AI' ? Colors.black : const Color(0xFF00FF66),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -206,130 +176,113 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                   const SizedBox(height: 20),
 
-                  // Upload Section Box
+                  // Live Telemetry Visualizer Box
                   Container(
                     width: double.infinity,
-                    height: 180,
+                    padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF131825),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Colors.cyan.withOpacity(0.3), width: 1.5),
+                      color: const Color(0xFF0E1420),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0xFF00FF66).withOpacity(0.4), width: 1.5),
                     ),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.cloud_upload_outlined, size: 48, color: Color(0xFF00F0FF)),
-                        const SizedBox(height: 12),
-                        const Text(
-                          'Upload Raw Vehicle Photo',
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 4),
-                        const Text(
-                          'Tap to select from gallery or snap a pic',
-                          style: TextStyle(color: Colors.grey, fontSize: 12),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.between,
+                          children: [
+                            Text(
+                              'ACTIVE TARGET: $_selectedSystem',
+                              style: const TextStyle(color: Color(0xFF00FF66), fontWeight: FontWeight.bold, fontSize: 14),
+                            ),
+                            const Icon(Icons.radar, color: Color(0xFF00FF66), size: 20),
+                          ],
                         ),
                         const SizedBox(height: 14),
-                        ElevatedButton.icon(
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Image Upload Studio Opened!')),
-                            );
-                          },
-                          icon: const Icon(Icons.camera_alt, size: 16, color: Colors.black),
-                          label: const Text('SELECT PHOTO', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF00F0FF),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(
+                            _selectedSystem == 'Tesla Cyber-Fleet'
+                                ? 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80'
+                                : 'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=800&q=80',
+                            height: 180,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
                           ),
+                        ),
+                        const SizedBox(height: 14),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            Text('Aero Drag Coef: 0.21 Cd', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                            Text('Neural Link: 12ms Latency', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Real-time AI Controls Section
+                  const Text(
+                    'Autonomous Matrix Parameters',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  const SizedBox(height: 12),
+
+                  Container(
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF0E1420),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.between,
+                          children: const [
+                            Text('Starlink Real-time Telemetry Sync'),
+                            Icon(Icons.check_circle, color: Color(0xFF00FF66), size: 18),
+                          ],
+                        ),
+                        const Divider(color: Colors.white24, height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.between,
+                          children: const [
+                            Text('AI Body & Chassis Dynamic Stress Test'),
+                            Icon(Icons.check_circle, color: Color(0xFF00FF66), size: 18),
+                          ],
+                        ),
+                        const Divider(color: Colors.white24, height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.between,
+                          children: const [
+                            Text('Mars Atmospheric Density Simulation'),
+                            Icon(Icons.check_circle, color: Color(0xFF00FF66), size: 18),
+                          ],
                         ),
                       ],
                     ),
                   ),
                   const SizedBox(height: 24),
 
-                  // Styles Hub Title
-                  const Text(
-                    'Select Modification Style',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                  const SizedBox(height: 12),
-
-                  // Styles List Grid
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: _styles.length,
-                    itemBuilder: (context, index) {
-                      final style = _styles[index];
-                      final isSelected = _selectedStyle == style['title'];
-                      return GestureDetector(
-                        onTap: () => setState(() => _selectedStyle = style['title']),
-                        child: Container(
-                          margin: const EdgeInsets.only(bottom: 12),
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF131825),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: isSelected ? const Color(0xFF00F0FF) : Colors.transparent,
-                              width: 2,
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.network(
-                                  style['image'],
-                                  width: 70,
-                                  height: 70,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              const SizedBox(width: 14),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      style['title'],
-                                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      style['desc'],
-                                      style: const TextStyle(color: Colors.grey, fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              if (isSelected)
-                                const Icon(Icons.check_circle, color: Color(0xFF00F0FF))
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 20),
-
-                  // Generate Button (Paid Feature Action)
+                  // Execute Optimization Button
                   SizedBox(
                     width: double.infinity,
                     height: 52,
                     child: ElevatedButton(
-                      onPressed: _triggerGeneration,
+                      onPressed: _runNeuralOptimization,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF00F0FF),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        backgroundColor: const Color(0xFF00FF66),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                       ),
                       child: const Text(
-                        'SYNTHESIZE 4 VARIATIONS (5 CREDITS)',
+                        'EXECUTE NEURAL OPTIMIZATION',
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
+                          letterSpacing: 1,
                         ),
                       ),
                     ),
@@ -338,15 +291,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xFF131825),
-        selectedItemColor: const Color(0xFF00F0FF),
+        backgroundColor: const Color(0xFF0E1420),
+        selectedItemColor: const Color(0xFF00FF66),
         unselectedItemColor: Colors.grey,
         currentIndex: _selectedIndex,
         onTap: (index) => setState(() => _selectedIndex = index),
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.auto_awesome), label: 'Studio'),
-          BottomNavigationBarItem(icon: Icon(Icons.grid_view), label: 'Gallery'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Garage'),
+          BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Control Hub'),
+          BottomNavigationBarItem(icon: Icon(Icons.analytics), label: 'Telemetry'),
+          BottomNavigationBarItem(icon: Icon(Icons.security), label: 'Security'),
         ],
       ),
     );
